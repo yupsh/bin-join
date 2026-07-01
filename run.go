@@ -12,6 +12,8 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
+const name = "join"
+
 const flagSeparator = "separator"
 
 // usageText is the command's multi-line usage synopsis, shown in --help.
@@ -45,7 +47,7 @@ func run(version string, args []string, _ io.Reader, stdout, stderr io.Writer, f
 	cmd.Writer = stdout
 	cmd.ErrWriter = stderr
 	if err := cmd.Run(context.Background(), args); err != nil {
-		_, _ = fmt.Fprintf(stderr, "join: %v\n", err)
+		_, _ = fmt.Fprintf(stderr, name+": %v\n", err)
 		return 1
 	}
 	return 0
@@ -53,7 +55,7 @@ func run(version string, args []string, _ io.Reader, stdout, stderr io.Writer, f
 
 func newApp(version string, stdout io.Writer, fs afero.Fs) *cli.Command {
 	return &cli.Command{
-		Name:            "join",
+		Name:            name,
 		Version:         version,
 		Usage:           "join lines of two files on a common field",
 		UsageText:       usageText,
